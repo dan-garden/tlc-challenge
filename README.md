@@ -41,6 +41,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Libraries/packages used
+    - react-create-app (comes bundled with: )
+        - React
+        - Typescript
+        - Jest
+    - TailwindCSS
+    - PopperJS
+    - React Icons
