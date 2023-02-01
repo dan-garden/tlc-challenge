@@ -37,9 +37,9 @@ const NumberPickerSelector = ({
 
             const isSelected = value.indexOf(number) !== -1;
             const selectedClass = isSelected ? 'bg-deep-purple-50 cursor-pointer' : `${!isMax ? 'hover:bg-gray-100 cursor-pointer' : 'cursor-not-allowed'}`;
-            const className = `rounded-md flex justify-center text-deep-purple-800 items-center p-2 text-sm relative ${selectedClass}`;
+            const className = `number-btn rounded-md flex justify-center text-deep-purple-800 items-center p-2 text-sm relative ${selectedClass}`;
 
-            return <div key={number} className={className} onClick={() => handleSelect(number)}>
+            return <div key={number} className={className} onClick={() => handleSelect(number)} data-testid={id + '-' + number}>
                 {isSelected && <div className='absolute top-0 left-0 w-full h-full z-0 flex justify-center items-center'>
                     <ImCross className='text-deep-purple-100 text-3xl opacity-50' />
                 </div>}

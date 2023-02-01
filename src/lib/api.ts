@@ -3,7 +3,7 @@ import { DrawConfig, DrawData } from './types';
 export const getLatestResults = async (config: DrawConfig) => {
 
     // Fake delay to show loading state
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // await new Promise(resolve => setTimeout(resolve, 1000));
 
     // Fetch data from API
     const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/sales/vmax/web/data/lotto/latestresults`, {

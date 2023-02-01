@@ -1,13 +1,20 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import NumberPicker from './NumberPicker';
 
+const mockPrimaryNumbers = [1, 2, 3, 4, 5];
+const mockSecondaryNumbers = [6];
+
 jest.mock('../lib/api', () => ({
-  getLatestResults: jest.fn().mockResolvedValue({
-    DrawResults: [{
-      PrimaryNumbers: [1, 2, 3, 4, 5],
-      SecondaryNumbers: [6]
-    }]
-  })
+    getLatestResults: () => {
+      return Promise.resolve({
+        DrawResults: [
+          {
+            PrimaryNumbers: mockPrimaryNumbers,
+            SecondaryNumbers: mockSecondaryNumbers
+          }
+        ]
+      });
+    }
 }));
 
 describe('NumberPicker', () => {
@@ -17,16 +24,17 @@ describe('NumberPicker', () => {
     const primaryMax = 45;
     const secondaryMax = 20;
 
-    const { getByTestId } = render(
-        <NumberPicker
-            primaryCount={primaryCount}
-            secondaryCount={secondaryCount}
-            primaryMax={primaryMax}
-            secondaryMax={secondaryMax}
-        />
-    );
 
   it('should render primary and secondary number picker components', () => {
+
+    render(
+      <NumberPicker
+          primaryCount={primaryCount}
+          secondaryCount={secondaryCount}
+          primaryMax={primaryMax}
+          secondaryMax={secondaryMax}
+      />
+  );
 
     const primaryNumberPicker = screen.getByTestId('primary-number-picker');
     const secondaryNumberPicker = screen.getByTestId('secondary-number-picker');
@@ -50,40 +58,66 @@ describe('NumberPicker', () => {
     });
   });
 
-
-
   it('should auto-fill numbers when auto-fill button is clicked', async () => {
 
-    // const autoFillButton = screen.getBy('autofill-button');
-    // fireEvent.click(autoFillButton);
+    render(
+      <NumberPicker
+          primaryCount={primaryCount}
+          secondaryCount={secondaryCount}
+          primaryMax={primaryMax}
+          secondaryMax={secondaryMax}
+      />
+  );
+    
+    // Click the auto-fill button
+    const autoFillButton = screen.getByTestId('auto-fill-button');
+    fireEvent.click(autoFillButton);
 
-    // const primaryNumbers = await screen.findByText('1, 2, 3, 4, 5');
-    // expect(primaryNumbers).toBeInTheDocument();
+    // Wait for the auto-fill to complete
+    await waitFor(() => {
+        expect(autoFillButton).not.toBeDisabled();
 
-    // const secondaryNumbers = await screen.findByText('6');
-    // expect(secondaryNumbers).toBeInTheDocument();
+        const selectedNumbers = screen.getByTestId('selected-numbers');
+
+        // Check for primary numbers
+        mockPrimaryNumbers.forEach((number) => {
+            expect(selectedNumbers).toHaveTextContent(number.toString());
+        });
+
+        // Check for secondary numbers
+        mockSecondaryNumbers.forEach((number) => {
+            expect(selectedNumbers).toHaveTextContent(number.toString());
+        });
+    });
   });
 
-//   it('should clear numbers when clear button is clicked', async () => {
-//     const { getByTestId, queryByText } = render(
-//       <NumberPicker
-//         primaryCount={5}
-//         secondaryCount={1}
-//         primaryMax={45}
-//         secondaryMax={20}
-//       />
-//     );
+  it('should clear numbers when clear button is clicked', async () => {
 
-//     const autoFillButton = screen.getByTestId('auto-fill-button');
-//     fireEvent.click(autoFillButton);
+    render(
+      <NumberPicker
+          primaryCount={primaryCount}
+          secondaryCount={secondaryCount}
+          primaryMax={primaryMax}
+          secondaryMax={secondaryMax}
+      />
+    );
 
-//     const clearButton = screen.getByTestId('clear-button');
-//     fireEvent.click(clearButton);
+      // Click first number in primary number picker
+      fireEvent.click(screen.getByTestId('primary-number-picker-1'));
 
-//     const primaryNumbers = screen.queryByText('1, 2, 3, 4, 5');
-//     expect(primaryNumbers).toBeNull();
+      // Check that the number is selected
+      await waitFor(() => {
+          expect(screen.getByTestId('selected-numbers')).toHaveTextContent('1');
+      });
 
-//     const secondaryNumbers = screen.queryByText('6');
-//     expect(secondaryNumbers).toBeNull();
-//   });
+      // Click the clear button
+      fireEvent.click(screen.getByTestId('clear-button'));
+
+      // Check that the number is no longer selected
+      await waitFor(() => {
+          expect(screen.getByTestId('selected-numbers')).not.toHaveTextContent('1');;
+      });
+
+  });
+
 });

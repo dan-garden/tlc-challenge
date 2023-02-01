@@ -36,10 +36,9 @@ const NumberPickerHeader = ({
         <div className='flex justify-end sm:grid gap-1 sm:grid-cols-2'>
             {/* <Tooltip content="Autofill with previous weeks results" placement="bottom-start" open={false}> */}
                 <IconButton
-                    data-testid="autofill-button"
+                    data-testid="auto-fill-button"
                     color="deep-purple"
                     size="sm"
-                    aria-label="Autofill with previous weeks results"
                     onClick={handleAutoFill}
                     disabled={loadingAutoFill}
                 >
@@ -48,7 +47,7 @@ const NumberPickerHeader = ({
             {/* </Tooltip> */}
             {/* <Tooltip content="Clear all selected numbers" placement="bottom-start" open={false}> */}
                 <IconButton
-                    title="Clear all selected numbers"
+                    data-testid="clear-button"
                     color="gray"
                     size="sm"
                     onClick={handleClear}
