@@ -7,7 +7,7 @@ const App: React.FC = () => {
 
       <h1 className="text-2xl text-center mb-6">Lotto Number Picker</h1>
 
-      <div className="border max-w-xl mx-auto w-full p1 sm:p-3 shadow-md rounded-md bg-white">
+      <div className="border max-w-xl mx-auto w-full p-1 sm:p-3 shadow-md rounded-md bg-white">
         <NumberPicker
           primaryCount={35}
           primaryMax={7}
