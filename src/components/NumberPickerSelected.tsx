@@ -14,7 +14,7 @@ const NumberPickerSelected = ({
 
     const primaryNumbersFilled = new Array(primaryMax).fill(0);
     const secondaryNumbersFilled = new Array(secondaryMax).fill(0);
-    const baseClass = 'rounded-full w-8 h-8 flex justify-center items-center text-sm';
+    const baseClass = 'rounded-full w-6 h-6 sm:w-8 sm:h-8 flex justify-center items-center text-xs sm:text-sm';
 
     return <div className='flex justify-center items-center gap-1'>
         {primaryNumbersFilled.map((number, index) => {

@@ -24,7 +24,7 @@ const NumberPickerHeader = ({
     handleClear
 }: NumberPickerHeaderProps) => {
     return <div className='flex flex-row justify-between items-center'>
-        <div>1</div>
+        <div className="hidden sm:block">1</div>
         <div>
             <NumberPickerSelected
                 primaryNumbers={primaryNumbers}
@@ -33,7 +33,7 @@ const NumberPickerHeader = ({
                 secondaryMax={secondaryMax}
             />
         </div>
-        <div className='grid gap-1 grid-cols-2'>
+        <div className='flex justify-end sm:grid gap-1 sm:grid-cols-2'>
             {/* <Tooltip content="Autofill with previous weeks results" placement="bottom-start" open={false}> */}
                 <IconButton
                     data-testid="autofill-button"

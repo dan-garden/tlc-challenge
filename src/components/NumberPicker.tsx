@@ -46,7 +46,7 @@ const NumberPicker = ({
 
   return (
     <div className='w-full'>
-        <div className="mb-5">
+        <div className="mb-2 sm:mb-4">
             <NumberPickerHeader
                 primaryNumbers={primaryNumbers}
                 primaryMax={primaryMax}
@@ -64,7 +64,7 @@ const NumberPicker = ({
             value={primaryNumbers}
             onChange={numbers => setPrimaryNumbers(numbers)}
         />
-        <div className='bg-gray-500 text-white w-full p-2 text-center text-xs uppercase'>
+        <div className='bg-gray-500 text-white w-full p-1 sm:p-2 text-center text-xs uppercase'>
             Select your powerball
         </div>
         <NumberPickerSelector

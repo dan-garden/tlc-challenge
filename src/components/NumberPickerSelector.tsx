@@ -32,7 +32,7 @@ const NumberPickerSelector = ({
         }
     };
 
-    return <div className='grid grid-cols-10 gap-1' id={id} data-testid={id}>
+    return <div className='grid grid-cols-8 sm:grid-cols-10 gap-1' id={id} data-testid={id}>
         {numbers.map(number => {
 
             const isSelected = value.indexOf(number) !== -1;
