@@ -42,10 +42,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Learn More
 
 Libraries/packages used
-    - react-create-app (comes bundled with: )
-        - React
-        - Typescript
-        - Jest
-    - TailwindCSS
-    - PopperJS
-    - React Icons
+    - [x] react-create-app (comes bundled with: React, Typescript, Jest)
+    - [x] TailwindCSS
+    - [x] React Icons
